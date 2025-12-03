@@ -1,9 +1,16 @@
+import db from '../database/db';
+
+interface Joke {
+  id: number;
+  text: string;
+  created_at: string;
+}
+
 export default defineEventHandler(() => {
+  // Get all jokes from database
+  const jokes = db.prepare('SELECT * FROM jokes ORDER BY created_at DESC').all() as Joke[];
+
   return {
-    jokes: [
-      "Hvorfor kan ikke syklister stå opp? Fordi de er to-hjulte!",
-      "Hva sier en datamus når den er lei seg? Jeg føler meg så klikket...",
-      "Hvorfor gikk JavaScript til psykologen? Fordi den hadde for mange callbacks!"
-    ]
+    jokes: jokes.map(joke => joke.text)
   };
 });
