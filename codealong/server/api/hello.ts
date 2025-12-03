@@ -1,6 +1,3 @@
 export default defineEventHandler(() => {
-  return {
-    message: "Hei fra API-et!",
-    time: new Date().toISOString()
-  };
+  throw new Error("Noe gikk galt!");
 });
